@@ -177,7 +177,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0600;
-				ORGANIZATIONNAME = "BuddyHOPP SA";
+				ORGANIZATIONNAME = “Nikita Leonov”;
 				TargetAttributes = {
 					11AD36D01A047D8B00C4C31A = {
 						CreatedOnToolsVersion = 6.0.1;
