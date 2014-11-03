@@ -1,36 +1,33 @@
 //
-//  NimbleWaitUntilErrorTests.swift
-//  NimbleWaitUntilErrorTests
+//  NimbleWaitUntilErrorSpec
+//  NimbleWaitUntilErrorSpec
 //
 //  Created by Nikita Leonov on 10/31/14.
-//  Copyright (c) 2014 BuddyHOPP SA. All rights reserved.
+//  Copyright (c) 2014 Nikita Leonov. All rights reserved.
 //
 
-import UIKit
-import XCTest
+import Quick
+import Nimble
 
-class NimbleWaitUntilErrorTests: XCTestCase {
-    
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock() {
-            // Put the code you want to measure the time of here.
+class NimbleWaitUntilErrorSpec:QuickSpec {
+    override func spec() {
+        describe("waitUntil") {
+            context("when there is heavy dispatch async happening") {
+                beforeEach {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        var i:Int = 0
+                        var result:Int = 2
+                        for (i = 0; i < 1000000000; i++) {
+                            result = result^result^i
+                        }
+                    }
+                }
+                it("will fail.") {
+                    waitUntil { done in
+                        done()
+                    }
+                }
+            }
         }
     }
-    
 }
